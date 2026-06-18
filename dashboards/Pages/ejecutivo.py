@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 # config
 
 st.set_page_config(
-    page_title="🍔 Fast Food Calorie Counter",
+    page_title="Fast Food Calorie Counter",
     layout="wide"
 )
 
@@ -174,7 +174,7 @@ st.plotly_chart(
 
 if "health_score" in df.columns:
 
-    st.header("✅ Top Productos Saludables")
+    st.header("Top Productos Saludables")
 
     healthy = (
         df.sort_values(

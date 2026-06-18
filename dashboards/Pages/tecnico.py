@@ -30,7 +30,7 @@ def load_data():
 
 df = load_data()
 
-st.title("⚙️ Dashboard Tecnico")
+st.title("Dashboard Tecnico")
 
 # metricas
 
