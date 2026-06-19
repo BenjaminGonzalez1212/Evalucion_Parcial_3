@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from sqlalchemy import create_engine
+import requests
+import os
+from dotenv import load_dotenv 
+
+load_dotenv()
 
 # config
 
@@ -122,6 +127,54 @@ if selected_items:
     )
 
 st.divider()
+
+st.header("🔍 Buscar Otros Alimentos (USDA API)")
+st.caption("¿Consumiste algo casero o natural? Búscalo en la base de datos del Gobierno de EE.UU.")
+
+# Creamos un campo de texto y un botón
+api_query = st.text_input("Ingresa un alimento en inglés (ej. banana, rice, apple):")
+
+if st.button("Buscar Alimento"):
+    if api_query:
+        # Llamamos a la API 
+        API_KEY = os.getenv("USDA_API_KEY") 
+        url = "https://api.nal.usda.gov/fdc/v1/foods/search"
+        params = {
+            'api_key': API_KEY,
+            'query': api_query,
+            'pageSize': 3 # Traemos solo los 3 mejores resultados para no saturar la pantalla
+        }
+        
+        with st.spinner('Consultando base de datos nutricional externa...'):
+            try:
+                response = requests.get(url, params=params)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    foods = data.get('foods', [])
+                    
+                    if foods:
+                        # Mostramos los resultados en tarjetas visuales
+                        for food in foods:
+                            nombre = food.get('description')
+                            calorias = 0
+                            
+                            # Buscamos las calorías en la lista de nutrientes
+                            for nutrient in food.get('foodNutrients', []):
+                                if nutrient.get('nutrientName') == 'Energy':
+                                    calorias = nutrient.get('value')
+                                    break
+                            
+                            # Mostramos un recuadro verde con el resultado
+                            st.success(f"🍏 **{nombre}**: {calorias} kcal (por porción estándar)")
+                    else:
+                        st.warning("No se encontraron resultados para esa búsqueda.")
+                else:
+                    st.error("Error al conectar con la API de USDA.")
+            except Exception as e:
+                st.error(f"Ocurrió un error en la conexión: {e}")
+    else:
+        st.warning("Por favor, ingresa un alimento antes de buscar.")
 
 # comparacion de cadenas
 
