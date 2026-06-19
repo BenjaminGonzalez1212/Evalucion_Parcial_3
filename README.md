@@ -41,4 +41,5 @@ python -m streamlit run dashboards/Pages/tecnico.py
 
 ## Equipo de desarrollo
 Benjamin Gonzales
+
 Cristopher Richasse
