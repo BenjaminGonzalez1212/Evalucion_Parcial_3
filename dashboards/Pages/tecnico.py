@@ -2,15 +2,16 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from sqlalchemy import create_engine
+import psycopg2
 
 st.set_page_config(
     page_title="Dashboard Tecnico",
     layout="wide"
 )
 
-DB_HOST = "localhost"
+DB_HOST = "100.59.201.22"
 DB_PORT = "5432"
-DB_NAME = "nutrition"
+DB_NAME = "calorie_db"
 DB_USER = "nutrition_user"
 DB_PASSWORD = "1234"
 
@@ -123,7 +124,7 @@ st.header("Sodio Promedio por Restaurante")
 sodium = (
     df.groupby("company")
     .agg({
-        "sodium_mg": "mean"
+        "sodium__mg": "mean"
     })
     .reset_index()
 )
@@ -131,7 +132,7 @@ sodium = (
 fig4 = px.bar(
     sodium,
     x="company",
-    y="sodium_mg",
+    y="sodium__mg",
     color="company"
 )
 

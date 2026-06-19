@@ -12,9 +12,9 @@ st.set_page_config(
 
 # databse
 
-DB_HOST = "localhost"
+DB_HOST = "100.59.201.22"
 DB_PORT = "5432"
-DB_NAME = "nutrition"
+DB_NAME = "calorie_db"
 DB_USER = "nutrition_user"
 DB_PASSWORD = "1234"
 
@@ -37,7 +37,7 @@ df = load_data()
 # title
 
 st.title('Fast Food Calorie Counter')
-st.caption("Comparación nutricional entre cadenas de comida rápida")
+st.caption("Comparacion nutricional entre cadenas de comida rapida")
 
 # KPI
 
@@ -60,7 +60,7 @@ col3.metric(
 
 col4.metric(
     "Sodio promedio",
-    round(df["sodium_mg"].mean(), 1)
+    round(df["sodium__mg"].mean(), 1)
 )
 
 st.divider()
@@ -91,7 +91,7 @@ if selected_items:
 
     total_calories = order["calories"].sum()
     total_protein = order["protein_g"].sum()
-    total_sodium = order["sodium_mg"].sum()
+    total_sodium = order["sodium__mg"].sum()
 
     c1, c2, c3 = st.columns(3)
 
@@ -116,7 +116,7 @@ if selected_items:
                 "item",
                 "calories",
                 "protein_g",
-                "sodium_mg"
+                "sodium__mg"
             ]
         ]
     )
