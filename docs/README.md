@@ -12,7 +12,7 @@ El proyecto integra múltiples fuentes de datos mediante un pipeline ETL automat
 * Visualización: Aplicaciones web interactivas desarrolladas con Streamlit y Plotly.
 * Despliegue: Contenedores Docker para garantizar la reproducibilidad del entorno.
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 /
 ├── api/                  # Scripts de extracción de la API de USDA

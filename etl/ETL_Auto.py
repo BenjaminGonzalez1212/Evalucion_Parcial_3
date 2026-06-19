@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 
 # configuración
 
-DB_HOST = "100.59.201.22"
+DB_HOST = "54.90.97.106"
 DB_PORT = "5432"
 DB_NAME = "calorie_db"
 DB_USER = "nutrition_user"

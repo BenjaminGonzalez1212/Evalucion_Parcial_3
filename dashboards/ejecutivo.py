@@ -17,7 +17,7 @@ st.set_page_config(
 
 # databse
 
-DB_HOST = "100.59.201.22"
+DB_HOST = "54.90.97.106"
 DB_PORT = "5432"
 DB_NAME = "calorie_db"
 DB_USER = "nutrition_user"
@@ -41,7 +41,7 @@ df = load_data()
 
 # title
 
-st.title('Fast Food Calorie Counter')
+st.title('Contador de calorias, para comida rapida')
 st.caption("Comparacion nutricional entre cadenas de comida rapida")
 
 # KPI
@@ -68,11 +68,9 @@ col4.metric(
     round(df["sodium__mg"].mean(), 1)
 )
 
-st.divider()
-
 # contador de calorias
 
-st.header("Calorie Counter")
+st.header("Contador de calorias")
 
 restaurant = st.selectbox(
     "Selecciona restaurante",
@@ -128,7 +126,7 @@ if selected_items:
 
 st.divider()
 
-st.header("🔍 Buscar Otros Alimentos (USDA API)")
+st.header("Buscar Otros Alimentos (USDA API)")
 st.caption("¿Consumiste algo casero o natural? Búscalo en la base de datos del Gobierno de EE.UU.")
 
 # Creamos un campo de texto y un botón
@@ -166,11 +164,15 @@ if st.button("Buscar Alimento"):
                                     break
                             
                             # Mostramos un recuadro verde con el resultado
-                            st.success(f"🍏 **{nombre}**: {calorias} kcal (por porción estándar)")
+                            st.success(f"**{nombre}**: {calorias} kcal (por porción estándar)")
                     else:
                         st.warning("No se encontraron resultados para esa búsqueda.")
                 else:
-                    st.error("Error al conectar con la API de USDA.")
+                    st.error(
+                        f"Error {response.status_code}"
+                    )
+
+                    st.write(response.text)
             except Exception as e:
                 st.error(f"Ocurrió un error en la conexión: {e}")
     else:

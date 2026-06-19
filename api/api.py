@@ -5,7 +5,7 @@ import os
 # Configuración inicial
 load_dotenv()
 
-API_KEY = os.getenv('bLVfL2ePeBVgk3WuZkPJXttS2gFWsfrb7xfbJNpj')
+API_KEY = os.getenv('USDA_API_KEY')
 BASE_URL = 'https://api.nal.usda.gov/fdc/v1/foods/search'
 
 # Parámetros de la consulta
